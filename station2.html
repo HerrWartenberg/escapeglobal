@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akte 2 – Wer ist NEXUS Corp?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer" id="timer">⏱ 45:00</div>
+
+  <div class="container">
+
+    <header class="masthead">
+      <span class="logo">Global Watch</span>
+      <span>Akte 02 / 05 · Transnationale Konzerne</span>
+    </header>
+
+    <div id="progress-trail" class="progress-trail"></div>
+
+    <h1>Akte 2: <span class="accent">Wer ist NEXUS Corp?</span></h1>
+
+    <div class="dossier">
+      <p>Der Container gehört dem Konzern <strong>NEXUS Corp</strong> – ein klassischer <strong>transnationaler Konzern (TNK)</strong> mit Niederlassungen in über 30 Ländern. Um zu verstehen, was passiert ist, müsst ihr die Funktionsweise solcher Konzerne durchschauen.</p>
+      <p>Prüft die folgenden Aussagen: Welche sind <strong>richtig (R)</strong>, welche <strong>falsch (F)</strong>?</p>
+    </div>
+
+    <h2>Aussagen über TNK</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 40px;">#</th>
+          <th>Aussage</th>
+          <th style="width: 80px;">R / F</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>TNK haben <strong>Tochter</strong>unternehmen in mehreren Ländern.</td><td>?</td></tr>
+        <tr><td>2</td><td>TNK produzieren immer dort, wo die Rohstoffe sind.</td><td>?</td></tr>
+        <tr><td>3</td><td>TNK verlagern Produktion oft in <strong>Niedrig</strong>lohnländer.</td><td>?</td></tr>
+        <tr><td>4</td><td>TNK zahlen weltweit überall gleich viel Steuern.</td><td>?</td></tr>
+        <tr><td>5</td><td>TNK können wirtschaftlich mächtiger sein als manche Staaten (<strong>Konzern</strong>macht).</td><td>?</td></tr>
+        <tr><td>6</td><td>TNK haben ihren Hauptsitz meist in Schwellenländern.</td><td>?</td></tr>
+        <tr><td>7</td><td>Die Standortwahl folgt dem Prinzip der <strong>Gewinn</strong>maximierung.</td><td>?</td></tr>
+      </tbody>
+    </table>
+
+    <h3>So baut ihr den Code</h3>
+
+    <ol>
+      <li>Markiert jede Aussage als R (richtig) oder F (falsch).</li>
+      <li>Bei jeder <strong>richtigen</strong> Aussage notiert ihr den <strong>Anfangsbuchstaben</strong> des fett gedruckten Schlüsselworts.</li>
+      <li>Schreibt diese Buchstaben in der Reihenfolge der Aussagen (1 bis 7) auf.</li>
+      <li>Das Ergebnis ist ein <strong>4-Buchstaben-Code</strong>.</li>
+    </ol>
+
+    <p style="font-style: italic; color: var(--ink-soft);">
+      Hinweis: Falsche Aussagen werden übersprungen. Es kommen nur die Buchstaben aus richtigen Aussagen in den Code.
+    </p>
+
+    <div class="hints">
+      <details>
+        <summary>Hinweis 1 öffnen</summary>
+        <div class="hint-content">
+          Denkt an bekannte TNK wie Nike, Apple, VW: Wo sitzt die Konzernzentrale – und wo wird produziert? Steueroasen sind ein wichtiges Stichwort!
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 2 öffnen</summary>
+        <div class="hint-content">
+          Vier Aussagen sind richtig, drei sind falsch. Die falschen sind solche, die zu vereinfachte oder unzutreffende Behauptungen aufstellen.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 3 öffnen (fast Lösung)</summary>
+        <div class="hint-content">
+          Falsch sind: Nr. 2 (Rohstoffstandort ist nur EIN Faktor), Nr. 4 (Steueroptimierung führt zu sehr unterschiedlichen Steuersätzen), Nr. 6 (Hauptsitze meist in Industrieländern). Richtig: 1, 3, 5, 7. Jetzt die Anfangsbuchstaben der Schlüsselwörter nehmen.
+        </div>
+      </details>
+    </div>
+
+    <div class="code-input-section">
+      <h3>▣ Code-Eingabe</h3>
+      <label for="code-input">4-Buchstaben-Code</label>
+      <input type="text" id="code-input" data-station="station2" maxlength="10" placeholder="????" autocomplete="off">
+      <button onclick="checkCode('station2')">Code prüfen</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">Akte 2 von 5</span>
+      <a href="station1.html">↺ Vorherige Akte</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    startTimer(45);
+    renderProgress('station2');
+  </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story gerettet – Ihr seid frei!</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Spezielle Erfolgs-Effekte */
+    body {
+      background: var(--paper);
+    }
+
+    .success-banner {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 40px;
+      text-align: center;
+      margin: 0 -40px 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 4px var(--paper), 0 0 0 8px var(--red-stamp);
+    }
+
+    .success-banner::before {
+      content: "★ ★ ★ ★ ★ ★ ★";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      letter-spacing: 12px;
+      color: var(--yellow-tape);
+      font-size: 12px;
+    }
+
+    .success-banner::after {
+      content: "★ ★ ★ ★ ★ ★ ★";
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      letter-spacing: 12px;
+      color: var(--yellow-tape);
+      font-size: 12px;
+    }
+
+    .success-banner h1 {
+      color: var(--paper);
+      font-size: clamp(40px, 8vw, 72px);
+      margin: 16px 0;
+      text-shadow: 4px 4px 0 var(--red-stamp);
+    }
+
+    .success-banner h1 .accent {
+      color: var(--yellow-tape);
+    }
+
+    .breaking-tag {
+      display: inline-block;
+      background: var(--red-stamp);
+      color: var(--paper);
+      padding: 8px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .stat {
+      background: rgba(255, 252, 240, 0.7);
+      border: 1px solid var(--ink-soft);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 4px 4px 0 var(--shadow);
+    }
+
+    .stat .number {
+      font-family: 'Special Elite', monospace;
+      font-size: 36px;
+      color: var(--red-stamp);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .restart-btn {
+      display: inline-block;
+      background: var(--paper-dark);
+      color: var(--ink);
+      padding: 12px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-top: 32px;
+      border: 2px solid var(--ink);
+      cursor: pointer;
+    }
+
+    .restart-btn:hover {
+      background: var(--red-stamp);
+      color: var(--paper);
+      border-color: var(--red-stamp);
+    }
+
+    /* Konfetti-Animation */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      animation: confetti-fall 3s linear forwards;
+      z-index: 1000;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="success-banner">
+      <span class="breaking-tag">▶ Breaking News</span>
+      <h1>Story <span class="accent">gerettet!</span></h1>
+      <p style="font-family: 'Special Elite', monospace; font-size: 20px; letter-spacing: 0.05em; margin-top: 16px; color: var(--paper);">
+        Ihr seid frei.
+      </p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <span class="number">5</span>
+        <span class="label">Akten gelöst</span>
+      </div>
+      <div class="stat">
+        <span class="number">✓</span>
+        <span class="label">Tür geöffnet</span>
+      </div>
+      <div class="stat">
+        <span class="number" id="final-time">--:--</span>
+        <span class="label">Benötigte Zeit</span>
+      </div>
+    </div>
+
+    <h2>Die Auflösung</h2>
+
+    <div class="dossier">
+      <p class="dropcap">
+        Euer Container wurde im Hafen von <strong>Singapur</strong> umgeleitet. Eine Whistleblowerin bei NEXUS Corp hatte den Zoll informiert: Das Coltan in den Smartphones stammte aus illegalen Minen im Kongo – aus genau der Sorte Minen, in der Kinder wie Joseph arbeiten.
+      </p>
+      <p>
+        Eure Recherche deckt auf: NEXUS Corp profitiert von einem System, in dem <strong>Mei Lin 12 Stunden für 280 € arbeitet</strong>, <strong>Thomas seinen Job verloren hat</strong>, <strong>Joseph in einer Mine schuftet</strong> – und Konzernzentrale, Aktionäre und Konsumenten in Europa und den USA davon profitieren.
+      </p>
+      <p>
+        Eure Geschichte erscheint morgen auf der Titelseite. Sie zeigt: <em>Globale Lieferketten ohne Transparenz und ohne Bindung an die UN-Nachhaltigkeitsziele produzieren systematische Ungerechtigkeit.</em>
+      </p>
+    </div>
+
+    <h2>Was ihr gelernt habt</h2>
+
+    <ul>
+      <li><strong>Welthandel</strong> verläuft entlang weniger zentraler Knotenpunkte (Häfen, Wasserstraßen).</li>
+      <li><strong>Transnationale Konzerne</strong> nutzen Standortvorteile gezielt für Gewinnmaximierung.</li>
+      <li><strong>Globale Wertschöpfungsketten</strong> verbinden Kontinente – und verschleiern oft, woher unsere Produkte wirklich kommen.</li>
+      <li>Globalisierung erzeugt <strong>Gewinner und Verlierer</strong> – die Bewertung hängt vom Vergleichsmaßstab ab.</li>
+      <li>Die <strong>17 SDGs</strong> sind ein Rahmen, mit dem sich globale Probleme strukturiert angehen lassen.</li>
+    </ul>
+
+    <h2>Reflexionsfragen für das Auswertungsgespräch</h2>
+
+    <ol>
+      <li>War Mei Lin Gewinnerin oder Verliererin? Begründet eure Position erneut – jetzt mit allem Wissen aus dem Spiel.</li>
+      <li>Welche Verantwortung tragen Konsumenten in Deutschland für die Arbeitsbedingungen in der Lieferkette?</li>
+      <li>Können freiwillige Selbstverpflichtungen von Konzernen reichen – oder braucht es Gesetze (Stichwort Lieferkettensorgfaltspflichtengesetz)?</li>
+    </ol>
+
+    <div class="warning"></div>
+
+    <p style="text-align: center; font-style: italic; margin-top: 32px;">
+      „Eine gute Recherche ist nie zu Ende – nur veröffentlicht."<br>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em;">— Eure Chefredakteurin</span>
+    </p>
+
+    <div style="text-align: center;">
+      <a href="#" class="restart-btn" onclick="resetGame(); return false;">↻ Neue Recherche starten</a>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">GLOBAL WATCH · Ausgabe 47</span>
+      <span>Erdkunde · Klasse 10</span>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Endzeit berechnen
+    try {
+      const start = parseInt(sessionStorage.getItem('gw_timer_start') || '0', 10);
+      if (start > 0) {
+        const elapsed = Math.floor((Date.now() - start) / 1000);
+        const mins = Math.floor(elapsed / 60);
+        const secs = elapsed % 60;
+        document.getElementById('final-time').textContent =
+          `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+    } catch (e) {}
+
+    // Konfetti
+    function spawnConfetti() {
+      const colors = ['#b8261c', '#d4a017', '#1a1410', '#2a5934', '#7a1a14'];
+      for (let i = 0; i < 60; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.animationDelay = (Math.random() * 2) + 's';
+        c.style.animationDuration = (2 + Math.random() * 2) + 's';
+        if (Math.random() > 0.5) c.style.borderRadius = '50%';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+      }
+    }
+    spawnConfetti();
+    setTimeout(spawnConfetti, 1500);
+  </script>
+</body>
+</html>

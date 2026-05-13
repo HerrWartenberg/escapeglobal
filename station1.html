@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akte 1 – Die Handelsroute</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer" id="timer">⏱ 45:00</div>
+
+  <div class="container">
+
+    <header class="masthead">
+      <span class="logo">Global Watch</span>
+      <span>Akte 01 / 05 · Welthandel</span>
+    </header>
+
+    <div id="progress-trail" class="progress-trail"></div>
+
+    <h1>Akte 1: <span class="accent">Die Handelsroute</span></h1>
+
+    <div class="dossier">
+      <p>Der vermisste Container startete im Hafen von <strong>Shenzhen (China)</strong> und sollte planmäßig in <strong>Hamburg</strong> eintreffen. Auf dem Weg passieren Containerschiffe mehrere bedeutende Knotenpunkte des Welthandels.</p>
+      <p>Wir haben vier Häfen/Wasserstraßen identifiziert. <strong>Ordnet sie in der richtigen Reihenfolge entlang der Route</strong>, dann wisst ihr, wo der Container zuletzt gesehen wurde.</p>
+    </div>
+
+    <h2>Die Stationen</h2>
+
+    <table>
+      <thead>
+        <tr><th style="width: 60px;">Code</th><th>Beschreibung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>Größter Hafen Europas, „Tor zur Welt" für Westeuropa</td></tr>
+        <tr><td><strong>B</strong></td><td>Künstliche Wasserstraße, verbindet Asien mit dem Mittelmeer</td></tr>
+        <tr><td><strong>C</strong></td><td>Stadtstaat in Südostasien, einer der größten Containerhäfen weltweit</td></tr>
+        <tr><td><strong>D</strong></td><td>Zielhafen in Deutschland</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Eure Aufgabe</h3>
+
+    <ol>
+      <li>Identifiziert die vier Orte: <em>Singapur · Suezkanal · Rotterdam · Hamburg</em>.</li>
+      <li>Bringt sie in die richtige Reihenfolge auf der Route <strong>Shenzhen → Hamburg</strong>.</li>
+      <li>Wandelt jeden Buchstaben in seine Position im Alphabet um (A=1, B=2, C=3, D=4).</li>
+      <li>Die Reihenfolge der Zahlen ist euer <strong>4-stelliger Code</strong>.</li>
+    </ol>
+
+    <div class="hints">
+      <details>
+        <summary>Hinweis 1 öffnen</summary>
+        <div class="hint-content">
+          Schaut euch eine Weltkarte an: Welche Route nimmt ein Frachter von China nach Europa? Westwärts durch Südostasien, dann durch das Rote Meer ins Mittelmeer.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 2 öffnen</summary>
+        <div class="hint-content">
+          Singapur liegt direkt auf der Route nach dem Verlassen Chinas. Der Suezkanal ist die berühmte „Abkürzung" ins Mittelmeer. Danach geht es nach Norden durch Gibraltar.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 3 öffnen (fast Lösung)</summary>
+        <div class="hint-content">
+          Reihenfolge: Singapur (C) → Suezkanal (B) → Rotterdam (A) → Hamburg (D). Jetzt nur noch die Buchstaben in Zahlen umwandeln und in der richtigen Reihenfolge aufschreiben.
+        </div>
+      </details>
+    </div>
+
+    <div class="code-input-section">
+      <h3>▣ Code-Eingabe</h3>
+      <label for="code-input">4-stelliger Zahlencode</label>
+      <input type="text" id="code-input" data-station="station1" maxlength="10" placeholder="????" autocomplete="off">
+      <button onclick="checkCode('station1')">Code prüfen</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">Akte 1 von 5</span>
+      <a href="index.html">↺ Zurück zur Übersicht</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    startTimer(45);
+    renderProgress('station1');
+  </script>
+</body>
+</html>

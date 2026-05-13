@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akte 4 – Vier Schicksale</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer" id="timer">⏱ 45:00</div>
+
+  <div class="container">
+
+    <header class="masthead">
+      <span class="logo">Global Watch</span>
+      <span>Akte 04 / 05 · Gewinner & Verlierer</span>
+    </header>
+
+    <div id="progress-trail" class="progress-trail"></div>
+
+    <h1>Akte 4: <span class="accent">Vier Schicksale</span></h1>
+
+    <div class="dossier">
+      <p>Im Rahmen der Recherche haben wir vier Menschen interviewt, deren Leben durch die Globalisierung tiefgreifend verändert wurde. Sind sie <strong>Gewinner (G)</strong> oder <strong>Verlierer (V)</strong>? Vergleicht ihre <strong>heutige Situation mit ihrer Ausgangslage</strong>.</p>
+    </div>
+
+    <h2>Die vier Fallakten</h2>
+
+    <div class="puzzle-grid">
+
+      <div class="dossier" style="margin: 16px 0;">
+        <h3>Fall 1 – Mei Lin (22), Shenzhen</h3>
+        <p>Arbeitet 12 Stunden täglich am Fließband bei einem Smartphone-Zulieferer. Lohn: <strong>280 €/Monat</strong>. Vor 5 Jahren lebte sie noch als Reisbäuerin in der Provinz Yunnan, oft am Rand der Armut.</p>
+      </div>
+
+      <div class="dossier" style="margin: 16px 0;">
+        <h3>Fall 2 – Thomas (54), Bochum</h3>
+        <p>30 Jahre lang Bergarbeiter im Steinkohlebergbau. Seine Zeche wurde geschlossen, weil deutsche Steinkohle nicht mit Importkohle konkurrieren kann. Sucht seit zwei Jahren erfolglos eine neue Stelle.</p>
+      </div>
+
+      <div class="dossier" style="margin: 16px 0;">
+        <h3>Fall 3 – Aisha (35), Nairobi</h3>
+        <p>Gründete vor drei Jahren ein IT-Startup. Programmiert über das Internet Apps für europäische Auftraggeber. Verdient inzwischen besser als viele Akademiker in ihrer Stadt.</p>
+      </div>
+
+      <div class="dossier" style="margin: 16px 0;">
+        <h3>Fall 4 – Joseph (12), Demokratische Republik Kongo</h3>
+        <p>Arbeitet seit zwei Jahren in einer Coltan-Mine, statt zur Schule zu gehen. Das Mineral wird für Smartphone-Akkus benötigt. Sein Lohn ernährt die Familie kaum.</p>
+      </div>
+
+    </div>
+
+    <h3>Diskussionsfrage (mündlich im Team)</h3>
+    <p style="background: rgba(212, 160, 23, 0.2); padding: 12px 20px; border-left: 4px solid var(--yellow-tape);">
+      Ist Mei Lin wirklich eine Gewinnerin? Oder Verliererin? Begründet eure Position kurz im Team, <em>bevor</em> ihr den Code eingebt.
+    </p>
+
+    <h3>So baut ihr den Code</h3>
+
+    <ol>
+      <li>Ordnet jeden Fall (1–4) der Kategorie <strong>G (Gewinner)</strong> oder <strong>V (Verlierer)</strong> zu.</li>
+      <li><strong>Konvention für dieses Rätsel:</strong> Wenn der Mensch seine Lage <em>im Vergleich zu früher verbessert</em> hat, gilt er als Gewinner – auch wenn die Arbeitsbedingungen problematisch bleiben.</li>
+      <li>Notiert die vier Buchstaben in der Reihenfolge 1–2–3–4.</li>
+      <li>Das Ergebnis ist ein <strong>4-Buchstaben-Code</strong>.</li>
+    </ol>
+
+    <div class="hints">
+      <details>
+        <summary>Hinweis 1 öffnen</summary>
+        <div class="hint-content">
+          Wer hat heute MEHR als vorher? Wer hat WENIGER? Vergleicht jeden Fall mit der Ausgangslage, nicht mit einem absoluten Maßstab.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 2 öffnen</summary>
+        <div class="hint-content">
+          Thomas (Strukturwandel-Verlierer) und Joseph (klares Opfer der Lieferkette) sind eindeutig V. Bei Mei Lin und Aisha hilft der Vergleich zur Ausgangssituation.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 3 öffnen (fast Lösung)</summary>
+        <div class="hint-content">
+          Reihenfolge: G – V – G – V. Mei Lin gilt nach unserer Konvention als Gewinnerin (auch wenn das didaktisch diskutabel bleibt – darüber lohnt sich ein Gespräch im Nachgang).
+        </div>
+      </details>
+    </div>
+
+    <div class="code-input-section">
+      <h3>▣ Code-Eingabe</h3>
+      <label for="code-input">4-Buchstaben-Code</label>
+      <input type="text" id="code-input" data-station="station4" maxlength="10" placeholder="????" autocomplete="off">
+      <button onclick="checkCode('station4')">Code prüfen</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">Akte 4 von 5</span>
+      <a href="station3.html">↺ Vorherige Akte</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    startTimer(45);
+    renderProgress('station4');
+  </script>
+</body>
+</html>

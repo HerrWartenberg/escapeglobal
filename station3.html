@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akte 3 – Wie entsteht ein Smartphone?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer" id="timer">⏱ 45:00</div>
+
+  <div class="container">
+
+    <header class="masthead">
+      <span class="logo">Global Watch</span>
+      <span>Akte 03 / 05 · Globale Wertschöpfungskette</span>
+    </header>
+
+    <div id="progress-trail" class="progress-trail"></div>
+
+    <h1>Akte 3: <span class="accent">Wie entsteht ein Smartphone?</span></h1>
+
+    <div class="dossier">
+      <p>Ein einziges Smartphone wandert auf seiner Reise vom Rohstoff bis zum Verkauf durch <strong>vier Kontinente</strong>. Das nennt man eine <strong>globale Wertschöpfungskette</strong>.</p>
+      <p>Bringt die sechs Produktionsschritte in die richtige Reihenfolge – das verrät uns, an welcher Stelle der Kette etwas schiefgegangen sein könnte.</p>
+    </div>
+
+    <h2>Die sechs Schritte</h2>
+
+    <table>
+      <thead>
+        <tr><th style="width: 60px;">Code</th><th>Schritt</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>L</strong></td><td>Endmontage in Shenzhen, China</td></tr>
+        <tr><td><strong>O</strong></td><td>Abbau von Coltan in der Demokratischen Republik Kongo</td></tr>
+        <tr><td><strong>B</strong></td><td>Verkauf im Elektronikmarkt in Deutschland</td></tr>
+        <tr><td><strong>A</strong></td><td>Design und Entwicklung im Silicon Valley, USA</td></tr>
+        <tr><td><strong>G</strong></td><td>Produktion von Mikrochips in Taiwan</td></tr>
+        <tr><td><strong>L</strong></td><td>Verschiffung über internationale Handelsrouten</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-style: italic; color: var(--ink-soft);">
+      Achtung: Zwei Schritte beginnen mit „L". Achtet auf die richtige Position im Ablauf!
+    </p>
+
+    <h3>So baut ihr den Code</h3>
+
+    <ol>
+      <li>Sortiert die Schritte chronologisch – vom Anfang bis zum Ende der Kette.</li>
+      <li>Schreibt die Buchstaben in der gefundenen Reihenfolge auf.</li>
+      <li>Das Ergebnis ist ein <strong>6-Buchstaben-Code</strong>.</li>
+    </ol>
+
+    <div class="hints">
+      <details>
+        <summary>Hinweis 1 öffnen</summary>
+        <div class="hint-content">
+          Was kommt zuerst – Rohstoff oder Verkauf? Denkt an die Wertschöpfungs-Pyramide: ganz unten die Rohstoffe, ganz oben der Verkauf.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 2 öffnen</summary>
+        <div class="hint-content">
+          Logik: Erst die Idee (Design), dann werden Bauteile (Chips) gefertigt, dann werden sie zusammengebaut, dann transportiert, dann verkauft. Der Rohstoff steht ganz am Anfang.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 3 öffnen (fast Lösung)</summary>
+        <div class="hint-content">
+          Reihenfolge: Rohstoff → Design → Mikrochips → Endmontage → Verschiffung → Verkauf. Jetzt nur noch die Buchstaben in dieser Reihenfolge aufschreiben.
+        </div>
+      </details>
+    </div>
+
+    <div class="code-input-section">
+      <h3>▣ Code-Eingabe</h3>
+      <label for="code-input">6-Buchstaben-Code</label>
+      <input type="text" id="code-input" data-station="station3" maxlength="10" placeholder="??????" autocomplete="off">
+      <button onclick="checkCode('station3')">Code prüfen</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">Akte 3 von 5</span>
+      <a href="station2.html">↺ Vorherige Akte</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    startTimer(45);
+    renderProgress('station3');
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finale – Der Türcode</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer" id="timer">⏱ 45:00</div>
+
+  <div class="container">
+
+    <header class="masthead">
+      <span class="logo">Global Watch</span>
+      <span>FINALE · Türcode zum Newsroom</span>
+    </header>
+
+    <div id="progress-trail" class="progress-trail"></div>
+
+    <h1>Finale: <span class="accent">Der Türcode</span></h1>
+
+    <div class="dossier">
+      <p>Ihr habt es fast geschafft. Fünf Akten, fünf Codes, eine Story. Jetzt nur noch die Tür zum Newsroom öffnen – dann ist die Recherche im Druck.</p>
+    </div>
+
+    <h2>Eure gesammelten Codes</h2>
+
+    <table>
+      <thead>
+        <tr><th>Akte</th><th>Thema</th><th>Code</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Welthandel</td><td><strong>3214</strong></td></tr>
+        <tr><td>2</td><td>Transnationale Konzerne</td><td><strong>TNKG</strong></td></tr>
+        <tr><td>3</td><td>Wertschöpfungskette</td><td><strong>OAGLLB</strong></td></tr>
+        <tr><td>4</td><td>Gewinner & Verlierer</td><td><strong>GVGV</strong></td></tr>
+        <tr><td>5</td><td>SDGs</td><td><strong>8632</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Das Schlüsselwort</h2>
+
+    <p>Eure Recherche dreht sich um <strong>verschwundene Container­ware</strong>. Bildet aus den <strong>Anfangsbuchstaben der fünf Stationsthemen</strong> ein einzelnes Wort:</p>
+
+    <table>
+      <tbody>
+        <tr><td><strong>W</strong></td><td>elthandel</td></tr>
+        <tr><td><strong>A</strong></td><td>kteure (Konzerne)</td></tr>
+        <tr><td><strong>R</strong></td><td>ohstoffe & Wertschöpfung</td></tr>
+        <tr><td><strong>E</strong></td><td>ntwicklungsfolgen (Gewinner/Verlierer)</td></tr>
+        <tr><td><strong>N</strong></td><td>achhaltigkeit</td></tr>
+      </tbody>
+    </table>
+
+    <p>→ Das Schlüsselwort: <em>Schreibt es auf einen Zettel, ihr braucht es gleich.</em></p>
+
+    <h2>Die Berechnung des Türcodes</h2>
+
+    <div class="dossier">
+      <p>Berechnet drei Zahlen und setzt sie zusammen:</p>
+      <ol>
+        <li><strong>Anzahl der Buchstaben</strong> des Schlüsselworts → Zahl A</li>
+        <li><strong>Quersumme von Code 1</strong> (3+2+1+4) → Zahl B</li>
+        <li><strong>Anzahl der „G" in Code 4</strong> (GVGV) → Zahl C</li>
+      </ol>
+      <p>Setzt die drei Zahlen direkt hintereinander zusammen: <strong>A B C</strong> ergibt einen <strong>4-stelligen Türcode</strong> (Zahl B ist zweistellig!).</p>
+    </div>
+
+    <div class="hints">
+      <details>
+        <summary>Hinweis 1 öffnen</summary>
+        <div class="hint-content">
+          Das Schlüsselwort hat 5 Buchstaben. Beginnt mit „W", endet auf „N".
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 2 öffnen</summary>
+        <div class="hint-content">
+          Zahl A = 5 (Buchstaben des Wortes WAREN). Zahl B = 3+2+1+4 = 10. Zahl C = wie oft kommt G in GVGV vor?
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 3 öffnen (fast Lösung)</summary>
+        <div class="hint-content">
+          A=5, B=10, C=2. Hintereinander: 5-10-2 → ohne Bindestriche: 5102. Das ist euer Türcode.
+        </div>
+      </details>
+    </div>
+
+    <div class="code-input-section">
+      <h3>▣ Türcode-Eingabe</h3>
+      <label for="code-input">4-stelliger Türcode</label>
+      <input type="text" id="code-input" data-station="final" maxlength="10" placeholder="????" autocomplete="off">
+      <button onclick="checkCode('final')">Tür öffnen</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">Finalrätsel</span>
+      <a href="station5.html">↺ Vorherige Akte</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    startTimer(45);
+    renderProgress('final');
+  </script>
+</body>
+</html>

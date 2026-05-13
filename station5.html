@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akte 5 – Die Lösung?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer" id="timer">⏱ 45:00</div>
+
+  <div class="container">
+
+    <header class="masthead">
+      <span class="logo">Global Watch</span>
+      <span>Akte 05 / 05 · Nachhaltige Entwicklungsziele</span>
+    </header>
+
+    <div id="progress-trail" class="progress-trail"></div>
+
+    <h1>Akte 5: <span class="accent">Die Lösung?</span></h1>
+
+    <div class="dossier">
+      <p>Die Vereinten Nationen haben <strong>17 Nachhaltigkeitsziele (Sustainable Development Goals, SDGs)</strong> definiert, die bis 2030 erreicht werden sollen. Auch unser NEXUS-Fall berührt mehrere dieser Ziele.</p>
+      <p>Ordnet die vier Maßnahmen den passenden SDG-Nummern zu – das hilft uns, die Empfehlungen am Ende der Recherche zu formulieren.</p>
+    </div>
+
+    <h2>Die vier Maßnahmen</h2>
+
+    <table>
+      <thead>
+        <tr><th style="width: 50px;">Code</th><th>Maßnahme</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>Faire Bezahlung in Lieferketten</td></tr>
+        <tr><td><strong>B</strong></td><td>Verbot von Kinderarbeit</td></tr>
+        <tr><td><strong>C</strong></td><td>Reduktion von CO₂-Emissionen beim Transport</td></tr>
+        <tr><td><strong>D</strong></td><td>Recycling von Smartphone-Rohstoffen</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Die vier möglichen SDGs</h2>
+
+    <table>
+      <thead>
+        <tr><th style="width: 60px;">Nr.</th><th>SDG-Bezeichnung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>8</strong></td><td>Menschenwürdige Arbeit und Wirtschaftswachstum</td></tr>
+        <tr><td><strong>12</strong></td><td>Nachhaltiger Konsum und Produktion</td></tr>
+        <tr><td><strong>13</strong></td><td>Maßnahmen zum Klimaschutz</td></tr>
+        <tr><td><strong>16</strong></td><td>Frieden, Gerechtigkeit und starke Institutionen</td></tr>
+      </tbody>
+    </table>
+
+    <h3>So baut ihr den Code</h3>
+
+    <ol>
+      <li>Ordnet jeder Maßnahme A–D die passende SDG-Nummer zu.</li>
+      <li>Schreibt die vier Nummern in der Reihenfolge A–B–C–D auf.</li>
+      <li>Nehmt dann von jeder Nummer nur die <strong>Einerstelle</strong> (z. B. aus 16 wird 6, aus 13 wird 3).</li>
+      <li>Das Ergebnis ist ein <strong>4-stelliger Zahlencode</strong>.</li>
+    </ol>
+
+    <div class="hints">
+      <details>
+        <summary>Hinweis 1 öffnen</summary>
+        <div class="hint-content">
+          Schlüsselwörter helfen: „Arbeit" verweist auf SDG 8, „Konsum/Produktion" auf SDG 12, „Klima" auf SDG 13, „Gerechtigkeit/Institutionen" auf SDG 16.
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 2 öffnen</summary>
+        <div class="hint-content">
+          Kinderarbeit ist primär ein Gerechtigkeitsthema (SDG 16). Recycling fällt unter nachhaltigen Konsum (SDG 12). Faire Bezahlung ist menschenwürdige Arbeit (SDG 8).
+        </div>
+      </details>
+      <details>
+        <summary>Hinweis 3 öffnen (fast Lösung)</summary>
+        <div class="hint-content">
+          Zuordnung: A=8, B=16, C=13, D=12. Einerstellen: 8 - 6 - 3 - 2. Das ist euer Code.
+        </div>
+      </details>
+    </div>
+
+    <div class="code-input-section">
+      <h3>▣ Code-Eingabe</h3>
+      <label for="code-input">4-stelliger Zahlencode</label>
+      <input type="text" id="code-input" data-station="station5" maxlength="10" placeholder="????" autocomplete="off">
+      <button onclick="checkCode('station5')">Code prüfen</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <footer class="station-nav">
+      <span class="progress">Akte 5 von 5</span>
+      <a href="station4.html">↺ Vorherige Akte</a>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    startTimer(45);
+    renderProgress('station5');
+  </script>
+</body>
+</html>
