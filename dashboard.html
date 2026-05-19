@@ -211,17 +211,6 @@
       background: var(--bg);
     }
 
-    .news-card-img-placeholder {
-      width: 100%;
-      height: 90px;
-      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,.3);
-      font-size: 30px;
-    }
-
     .news-card-body {
       padding: 13px 16px 15px;
     }
@@ -347,7 +336,7 @@
 <script>
   const REFRESH_MS = 5 * 60 * 1000;
   // WordPress REST API – kein PHP, kein Proxy nötig
-  const API = 'https://www.realschule-florastrasse.de/wp-json/wp/v2/posts?categories=34&per_page=10&_embed&_fields=id,title,link,date,excerpt,content,_links,_embedded';
+  const API = 'https://www.realschule-florastrasse.de/wp-json/wp/v2/posts?categories=34&per_page=10&_embed';
 
   // ── Uhr ─────────────────────────────────────────────────────
   const DAYS   = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
@@ -400,11 +389,15 @@
       const excerpt = stripHtml(post.excerpt?.rendered || post.content?.rendered || '')
                         .replace(/\s+/g, ' ').trim().slice(0, 220);
       const media   = post._embedded?.['wp:featuredmedia']?.[0];
-      const imgSrc  = media?.media_details?.sizes?.medium?.source_url || media?.source_url || null;
+      const imgSrc  = media?.media_details?.sizes?.medium?.source_url
+                   || media?.media_details?.sizes?.large?.source_url
+                   || media?.source_url
+                   || extractFirstImg(post.content?.rendered)
+                   || null;
 
       const imgHtml = imgSrc
         ? `<img class="news-card-img" src="${esc(imgSrc)}" alt="" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="news-card-img-placeholder">📰</div>`;
+        : '';
 
       return `
         <div class="news-card">
