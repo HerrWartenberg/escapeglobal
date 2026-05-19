@@ -323,7 +323,7 @@
     <div class="panel-card">
       <iframe
         id="subst-frame"
-        src="https://flora-realschule.webuntis.com/WebUntis/monitor?school=flora-realschule&monitorType=subst&format=SuS%20Test"
+        src="https://flora-realschule.webuntis.com/WebUntis/monitor?school=flora-realschule&monitorType=subst&format=SuS_aktueller_Tag"
         title="Vertretungsplan"
         allowfullscreen
       ></iframe>
@@ -457,7 +457,7 @@
   }
 
   // ── iframe-Reload ────────────────────────────────────────────
-  const SUBST_SRC = document.getElementById('subst-frame').src;
+  const SUBST_SRC = 'https://flora-realschule.webuntis.com/WebUntis/monitor?school=flora-realschule&monitorType=subst&format=SuS_aktueller_Tag';
   setInterval(() => {
     const f = document.getElementById('subst-frame');
     f.src = '';
