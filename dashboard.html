@@ -350,12 +350,11 @@
 
 <script>
   // ── Konfiguration ────────────────────────────────────────────
-  const RSS_URL      = 'https://www.realschule-florastrasse.de/?feed=rss2&cat=34';
   const REFRESH_MS   = 5 * 60 * 1000;   // News alle 5 Minuten laden
   const PAGE_RELOAD  = 15 * 60 * 1000;  // Ganze Seite alle 15 Min neu laden
 
-  // rss2json als CORS-Proxy – kostenlos, kein Key nötig
-  const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}&api_key=&count=10`;
+  // Lokaler PHP-Proxy – kein Drittanbieter nötig
+  const API = 'rss-proxy.php';
 
   // ── Uhr ─────────────────────────────────────────────────────
   const DAYS   = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
