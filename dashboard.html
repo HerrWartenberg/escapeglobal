@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realschule Florastraße – Dashboard</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:    #1a3a5c;
+      --accent:   #e8a020;
+      --bg:       #f0f2f5;
+      --surface:  #ffffff;
+      --text:     #1c2333;
+      --muted:    #6b7a99;
+      --border:   #dde1ea;
+      --header-h: 64px;
+      --gap:      12px;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ── Header ───────────────────────────────────────────────── */
+    header {
+      height: var(--header-h);
+      background: var(--brand);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      z-index: 10;
+      position: relative;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .school-logo {
+      width: 42px;
+      height: 42px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--brand);
+      flex-shrink: 0;
+      letter-spacing: -1px;
+    }
+
+    .school-name {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+
+    .school-subtitle {
+      font-size: 12px;
+      opacity: .7;
+      margin-top: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+
+    #clock {
+      font-size: 28px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .04em;
+    }
+
+    #date-display {
+      font-size: 13px;
+      opacity: .75;
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    /* ── Split Layout ─────────────────────────────────────────── */
+    .split {
+      display: flex;
+      height: calc(100vh - var(--header-h));
+      gap: var(--gap);
+      padding: var(--gap);
+    }
+
+    /* ── Left Panel: Vertretungsplan ──────────────────────────── */
+    .panel-left {
+      flex: 1 1 55%;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .panel-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding-left: 2px;
+    }
+
+    .panel-card {
+      flex: 1;
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+      border: 1px solid var(--border);
+    }
+
+    #subst-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ── Right Panel: News ────────────────────────────────────── */
+    .panel-right {
+      flex: 1 1 42%;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .news-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding-left: 2px;
+    }
+
+    .refresh-badge {
+      font-size: 10px;
+      color: var(--muted);
+      background: var(--border);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .news-scroll {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    /* ── News Card ────────────────────────────────────────────── */
+    .news-card {
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: box-shadow .15s;
+    }
+
+    .news-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    }
+
+    .news-card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg);
+    }
+
+    .news-card-img-placeholder {
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(135deg, var(--brand) 0%, #2d6099 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.35);
+      font-size: 32px;
+    }
+
+    .news-card-body {
+      padding: 14px 16px;
+    }
+
+    .news-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .news-meta-dot {
+      width: 3px; height: 3px;
+      background: var(--muted);
+      border-radius: 50%;
+    }
+
+    .news-title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .news-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .news-title a:hover {
+      color: var(--brand);
+    }
+
+    .news-excerpt {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── Loading / Error States ───────────────────────────────── */
+    .news-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-icon { font-size: 36px; }
+
+    /* ── Auto-refresh indicator ───────────────────────────────── */
+    .progress-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 1s linear;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="school-logo">RS</div>
+    <div>
+      <div class="school-name">Realschule Florastraße</div>
+      <div class="school-subtitle">Aktuelles &amp; Vertretungsplan</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div id="date-display"></div>
+    <div id="clock"></div>
+  </div>
+</header>
+
+<div class="split">
+
+  <!-- ── Linke Seite: Vertretungsplan ── -->
+  <div class="panel-left">
+    <div class="panel-label">Vertretungsplan heute</div>
+    <div class="panel-card">
+      <iframe
+        id="subst-frame"
+        src="https://flora-realschule.webuntis.com/WebUntis/monitor?school=flora-realschule&monitorType=subst&format=SuS%20Test"
+        title="Vertretungsplan"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- ── Rechte Seite: News ── -->
+  <div class="panel-right">
+    <div class="news-header">
+      <div class="panel-label" style="margin-bottom:0">Neuigkeiten aus der Schule</div>
+      <span class="refresh-badge" id="refresh-label">aktualisiert gerade eben</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+    <div style="height: 10px;"></div>
+    <div id="news-container" class="news-scroll">
+      <div class="news-state"><div class="spinner"></div><span>Lade Neuigkeiten…</span></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── Konfiguration ────────────────────────────────────────────
+  const RSS_URL      = 'https://www.realschule-florastrasse.de/?feed=rss2&cat=34';
+  const REFRESH_MS   = 5 * 60 * 1000;   // News alle 5 Minuten laden
+  const PAGE_RELOAD  = 15 * 60 * 1000;  // Ganze Seite alle 15 Min neu laden
+
+  // rss2json als CORS-Proxy – kostenlos, kein Key nötig
+  const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}&api_key=&count=10`;
+
+  // ── Uhr ─────────────────────────────────────────────────────
+  const DAYS   = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const MONTHS = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+  function updateClock() {
+    const now  = new Date();
+    const hh   = String(now.getHours()).padStart(2,'0');
+    const mm   = String(now.getMinutes()).padStart(2,'0');
+    const ss   = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('clock').textContent = `${hh}:${mm}:${ss}`;
+    document.getElementById('date-display').innerHTML =
+      `${DAYS[now.getDay()]}<br>${now.getDate()}. ${MONTHS[now.getMonth()]} ${now.getFullYear()}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // ── News laden ───────────────────────────────────────────────
+  function stripHtml(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return d.textContent || d.innerText || '';
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    if (isNaN(d)) return '';
+    return `${d.getDate()}. ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  function renderNews(items) {
+    const container = document.getElementById('news-container');
+    if (!items || items.length === 0) {
+      container.innerHTML = `
+        <div class="news-state">
+          <span class="error-icon">📭</span>
+          <span>Keine Neuigkeiten gefunden.</span>
+        </div>`;
+      return;
+    }
+
+    container.innerHTML = items.map(item => {
+      const title   = item.title || 'Kein Titel';
+      const link    = item.link  || '#';
+      const date    = formatDate(item.pubDate);
+      const excerpt = stripHtml(item.description || item.content || '').trim().slice(0, 220);
+      const imgSrc  = item.thumbnail || item.enclosure?.link || extractFirstImg(item.content);
+
+      const imgHtml = imgSrc
+        ? `<img class="news-card-img" src="${escAttr(imgSrc)}" alt="" loading="lazy" onerror="this.style.display='none'">`
+        : `<div class="news-card-img-placeholder">📰</div>`;
+
+      return `
+        <div class="news-card">
+          ${imgHtml}
+          <div class="news-card-body">
+            <div class="news-meta">
+              <span>${date}</span>
+            </div>
+            <div class="news-title"><a href="${escAttr(link)}" target="_blank" rel="noopener">${esc(title)}</a></div>
+            ${excerpt ? `<div class="news-excerpt">${esc(excerpt)}</div>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function extractFirstImg(html) {
+    if (!html) return null;
+    const m = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+    return m ? m[1] : null;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function escAttr(s) { return esc(s); }
+
+  async function loadNews() {
+    try {
+      const res  = await fetch(API);
+      const data = await res.json();
+      if (data.status === 'ok') {
+        renderNews(data.items);
+        updateRefreshLabel();
+      } else {
+        throw new Error(data.message || 'Feed-Fehler');
+      }
+    } catch (err) {
+      console.warn('RSS-Fehler:', err);
+      document.getElementById('news-container').innerHTML = `
+        <div class="news-state">
+          <span class="error-icon">⚠️</span>
+          <strong>Neuigkeiten konnten nicht geladen werden.</strong>
+          <span style="font-size:12px">${esc(String(err.message))}</span>
+        </div>`;
+    }
+  }
+
+  function updateRefreshLabel() {
+    const now = new Date();
+    document.getElementById('refresh-label').textContent =
+      `aktualisiert ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')} Uhr`;
+  }
+
+  // ── Fortschrittsbalken für nächste Aktualisierung ────────────
+  let progStart = Date.now();
+  const prog = document.getElementById('prog');
+
+  function animateProgress() {
+    const elapsed   = Date.now() - progStart;
+    const pct       = Math.min(100, (elapsed / REFRESH_MS) * 100);
+    prog.style.width = pct + '%';
+    if (pct < 100) requestAnimationFrame(animateProgress);
+  }
+
+  function scheduleRefresh() {
+    progStart = Date.now();
+    animateProgress();
+    setTimeout(() => {
+      loadNews();
+      scheduleRefresh();
+    }, REFRESH_MS);
+  }
+
+  // ── Seiten-Reload (damit Vertretungsplan stets aktuell bleibt)
+  setTimeout(() => location.reload(), PAGE_RELOAD);
+
+  // ── Start ────────────────────────────────────────────────────
+  loadNews();
+  scheduleRefresh();
+</script>
+
+</body>
+</html>
