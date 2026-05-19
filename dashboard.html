@@ -418,7 +418,8 @@
   // ── News laden ───────────────────────────────────────────────
   async function loadNews() {
     try {
-      const res  = await fetch(API);
+      const res = await fetch(API);
+      if (!res.ok) throw new Error(`HTTP ${res.status} – rss-proxy.php nicht erreichbar`);
       const data = await res.json();
       if (data.status === 'ok') {
         renderNews(data.items);
@@ -436,6 +437,7 @@
           <span class="error-icon">⚠️</span>
           <strong>Neuigkeiten konnten nicht geladen werden.</strong>
           <span style="font-size:12px;margin-top:4px">${esc(String(err.message))}</span>
+          <span style="font-size:11px;color:#aaa">Diagnose: <a href="rss-proxy.php?test=1" target="_blank" style="color:#29aae1">rss-proxy.php?test=1</a></span>
         </div>`;
     }
   }
