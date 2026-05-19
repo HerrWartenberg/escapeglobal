@@ -1,0 +1,2 @@
+# Verhindert dass WordPress PHP-Dateien in diesem Ordner abfängt
+RewriteEngine Off
