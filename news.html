@@ -17,82 +17,79 @@
       flex-direction: column;
     }
 
-    /* ── Beitrags-Slides ──────────────────────────────── */
-    #stage {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
+    #progress { height: 3px; background: #eaf3fb; flex-shrink: 0; }
+    #progress-fill { height: 100%; background: #29aae1; width: 0%; }
+
+    /* ── Stage ───────────────────────────────────────────── */
+    #stage { flex: 1; position: relative; overflow: hidden; }
 
     .slide {
       position: absolute;
       inset: 0;
-      padding: 20px 20px 8px;
-      overflow-y: auto;
+      padding: 16px 20px 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       opacity: 0;
       transition: opacity .7s ease;
       pointer-events: none;
-      scrollbar-width: thin;
-      scrollbar-color: #c5d9ef transparent;
     }
 
-    .slide.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .slide.active { opacity: 1; pointer-events: auto; }
 
+    /* ── Header-Bereich (feste Höhe) ────────────────────── */
     .post-date {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .1em;
       color: #5a7a9a;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
+      flex-shrink: 0;
     }
 
     .post-date::before {
       content: '';
-      display: inline-block;
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       background: #f5a623;
       border-radius: 50%;
       flex-shrink: 0;
     }
 
     .post-title {
-      font-size: 42px;
+      font-size: 30px;
       font-weight: 700;
       color: #0c2594;
       line-height: 1.2;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
     }
 
-    .post-text {
-      font-size: 24px;
-      line-height: 1.6;
-      color: #2a3a5a;
+    /* ── Content-Bereich (dynamisch) ────────────────────── */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      gap: 12px;
     }
 
-    .post-text p { margin-bottom: 14px; }
-    .post-text p:last-child { margin-bottom: 0; }
-    .post-text a { color: #0c2594; }
-
-    /* ── Bild-Slider ──────────────────────────────────── */
+    /* ── Bild-Slider ─────────────────────────────────────── */
     .img-slider {
       position: relative;
       width: 100%;
       background: #f4f8fd;
       border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 14px;
+      flex-shrink: 0;
     }
 
     .img-slider img {
       width: 100%;
-      max-height: 380px;
+      height: 100%;
       object-fit: contain;
       display: block;
       opacity: 0;
@@ -119,15 +116,27 @@
     .slider-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: rgba(255,255,255,.5);
+      background: rgba(12,37,148,.25);
       transition: background .3s;
     }
 
-    .slider-dot.on { background: #fff; }
+    .slider-dot.on { background: #0c2594; }
 
-    /* ── Post-Navigationsdots ─────────────────────────── */
+    /* ── Text ────────────────────────────────────────────── */
+    .post-text {
+      overflow: hidden;
+      flex-shrink: 0;
+      color: #2a3a5a;
+      line-height: 1.55;
+    }
+
+    .post-text p { margin-bottom: 10px; }
+    .post-text p:last-child { margin-bottom: 0; }
+    .post-text a { color: #0c2594; }
+
+    /* ── Nav ─────────────────────────────────────────────── */
     #post-nav {
-      height: 32px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -143,37 +152,14 @@
       cursor: pointer;
     }
 
-    .post-dot.on {
-      background: #0c2594;
-      transform: scale(1.25);
-    }
+    .post-dot.on { background: #0c2594; transform: scale(1.25); }
 
-    /* ── Fortschrittsbalken ───────────────────────────── */
-    #progress {
-      height: 3px;
-      background: #eaf3fb;
-      flex-shrink: 0;
-    }
-
-    #progress-fill {
-      height: 100%;
-      background: #29aae1;
-      width: 0%;
-      transition: width 1s linear;
-    }
-
-    /* ── Lade-/Fehlerstatus ───────────────────────────── */
+    /* ── Status ──────────────────────────────────────────── */
     .state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      height: 100%;
-      color: #5a7a9a;
-      font-size: 14px;
-      text-align: center;
-      padding: 32px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; height: 100%;
+      color: #5a7a9a; font-size: 14px; text-align: center;
     }
 
     .spinner {
@@ -191,14 +177,19 @@
 
 <div id="progress"><div id="progress-fill"></div></div>
 <div id="stage">
-  <div class="slide active"><div class="state"><div class="spinner"></div><span>Lade Beiträge…</span></div></div>
+  <div class="slide active">
+    <div class="state"><div class="spinner"></div><span>Lade Beiträge…</span></div>
+  </div>
 </div>
 <div id="post-nav"></div>
 
 <script>
   const API           = 'https://www.realschule-florastrasse.de/wp-json/wp/v2/posts?categories=34&per_page=5&_embed';
-  const POST_DURATION = 18000;  // ms pro Beitrag
-  const IMG_DURATION  = 4000;   // ms pro Bild
+  const POST_DURATION = 18000;
+  const IMG_DURATION  = 4000;
+  const MAX_FONT      = 24;   // px – Startwert für Body-Text
+  const MIN_FONT      = 14;   // px – Untergrenze
+  const MIN_SLIDER_H  = 160;  // px – Mindesthöhe Bildslider
 
   const MONTHS = ['Januar','Februar','März','April','Mai','Juni','Juli','August',
                   'September','Oktober','November','Dezember'];
@@ -208,46 +199,79 @@
     return `${d.getDate()}. ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
   }
 
-  // Bilder aus Content extrahieren, aus Text entfernen
   function parseContent(html) {
     const doc = new DOMParser().parseFromString(html || '', 'text/html');
     const imgs = [...doc.querySelectorAll('img')]
-      .map(i => i.src)
-      .filter(s => s && !s.endsWith('gif'));
+      .map(i => i.src).filter(s => s && !s.endsWith('.gif'));
     doc.querySelectorAll('figure, img').forEach(el => el.remove());
     doc.querySelectorAll('p').forEach(p => { if (!p.textContent.trim()) p.remove(); });
     return { imgs, text: doc.body.innerHTML };
   }
 
-  // Slider-HTML bauen
   function buildSlider(imgs) {
     if (!imgs.length) return '';
-    const dotsHtml = imgs.length > 1
+    const dots = imgs.length > 1
       ? `<div class="slider-dots">${imgs.map((_, i) =>
           `<span class="slider-dot${i === 0 ? ' on' : ''}"></span>`).join('')}</div>`
       : '';
-    return `
-      <div class="img-slider">
-        ${imgs.map((src, i) =>
-          `<img src="${src}" alt="" loading="lazy" class="${i === 0 ? 'visible' : ''}" onerror="this.remove()">`
-        ).join('')}
-        ${dotsHtml}
-      </div>`;
+    return `<div class="img-slider">
+      ${imgs.map((src, i) =>
+        `<img src="${src}" alt="" loading="lazy" class="${i === 0 ? 'visible' : ''}" onerror="this.remove()">`
+      ).join('')}${dots}</div>`;
   }
 
-  // ── Bild-Slider-Steuerung ────────────────────────────
+  // ── Dynamisches Layout ──────────────────────────────────
+  function autoFit(slideEl) {
+    const body    = slideEl.querySelector('.slide-body');
+    const slider  = slideEl.querySelector('.img-slider');
+    const textEl  = slideEl.querySelector('.post-text');
+    if (!body) return;
+
+    const bodyH = body.clientHeight;
+    const gap   = slider && textEl ? 12 : 0;
+
+    if (slider && textEl) {
+      // Schriftgröße so wählen dass Text + Slider in bodyH passen
+      let fontSize = MAX_FONT;
+      while (fontSize >= MIN_FONT) {
+        textEl.style.fontSize = fontSize + 'px';
+        const textH   = textEl.scrollHeight;
+        const sliderH = bodyH - gap - textH;
+        if (sliderH >= MIN_SLIDER_H) break;
+        fontSize--;
+      }
+      // Slider bekommt restlichen Platz
+      const textH   = textEl.scrollHeight;
+      const sliderH = Math.max(MIN_SLIDER_H, bodyH - gap - textH);
+      slider.style.height = sliderH + 'px';
+
+    } else if (textEl) {
+      // Nur Text: Schriftgröße so groß wie möglich ohne Überlauf
+      let fontSize = MAX_FONT;
+      textEl.style.fontSize = fontSize + 'px';
+      while (fontSize > MIN_FONT && textEl.scrollHeight > bodyH) {
+        fontSize--;
+        textEl.style.fontSize = fontSize + 'px';
+      }
+
+    } else if (slider) {
+      // Nur Bilder: volle Höhe
+      slider.style.height = bodyH + 'px';
+    }
+  }
+
+  // ── Bild-Slider ─────────────────────────────────────────
   const imgTimers = {};
 
-  function startImgSlider(slideEl, postIdx) {
-    if (imgTimers[postIdx]) clearInterval(imgTimers[postIdx]);
+  function startImgSlider(slideEl, idx) {
+    if (imgTimers[idx]) clearInterval(imgTimers[idx]);
     const slider = slideEl.querySelector('.img-slider');
     if (!slider) return;
     const imgs = [...slider.querySelectorAll('img')];
     const dots = [...slider.querySelectorAll('.slider-dot')];
     if (imgs.length < 2) return;
-
     let cur = 0;
-    imgTimers[postIdx] = setInterval(() => {
+    imgTimers[idx] = setInterval(() => {
       imgs[cur].classList.remove('visible');
       dots[cur]?.classList.remove('on');
       cur = (cur + 1) % imgs.length;
@@ -256,49 +280,45 @@
     }, IMG_DURATION);
   }
 
-  function stopImgSlider(postIdx) {
-    if (imgTimers[postIdx]) { clearInterval(imgTimers[postIdx]); delete imgTimers[postIdx]; }
+  function stopImgSlider(idx) {
+    clearInterval(imgTimers[idx]);
+    delete imgTimers[idx];
   }
 
-  // ── Post-Wechsel ─────────────────────────────────────
-  let currentPost = 0;
-  let postTimer   = null;
-  let progStart   = 0;
-  let slides      = [];
-  let dots        = [];
+  // ── Post-Wechsel ─────────────────────────────────────────
+  let current = 0, postTimer = null, progStart = 0;
+  let slides = [], navDots = [];
 
   function showPost(idx) {
-    slides[currentPost]?.classList.remove('active');
-    dots[currentPost]?.classList.remove('on');
-    stopImgSlider(currentPost);
-
-    currentPost = (idx + slides.length) % slides.length;
-    slides[currentPost].classList.add('active');
-    slides[currentPost].scrollTop = 0;
-    dots[currentPost]?.classList.add('on');
-    startImgSlider(slides[currentPost], currentPost);
+    slides[current]?.classList.remove('active');
+    navDots[current]?.classList.remove('on');
+    stopImgSlider(current);
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    navDots[current]?.classList.add('on');
+    startImgSlider(slides[current], current);
     startProgress();
   }
 
-  // ── Fortschrittsbalken ───────────────────────────────
+  // ── Fortschrittsbalken ───────────────────────────────────
   const fill = document.getElementById('progress-fill');
   let rafId  = null;
 
   function startProgress() {
     progStart = Date.now();
-    if (rafId) cancelAnimationFrame(rafId);
+    cancelAnimationFrame(rafId);
+    fill.style.transition = 'none';
+    fill.style.width = '0%';
     function tick() {
       const pct = Math.min(100, ((Date.now() - progStart) / POST_DURATION) * 100);
       fill.style.transition = 'width 1s linear';
       fill.style.width = pct + '%';
       if (pct < 100) rafId = requestAnimationFrame(tick);
     }
-    fill.style.transition = 'none';
-    fill.style.width = '0%';
     requestAnimationFrame(tick);
   }
 
-  // ── Hauptfunktion ────────────────────────────────────
+  // ── Laden ────────────────────────────────────────────────
   async function load() {
     try {
       const res   = await fetch(API);
@@ -306,8 +326,8 @@
       const posts = await res.json();
       if (!posts.length) throw new Error('Keine Beiträge gefunden');
 
-      const stage  = document.getElementById('stage');
-      const navEl  = document.getElementById('post-nav');
+      const stage = document.getElementById('stage');
+      const navEl = document.getElementById('post-nav');
 
       stage.innerHTML = posts.map((post, i) => {
         const { imgs, text } = parseContent(post.content?.rendered);
@@ -315,31 +335,37 @@
           <div class="slide${i === 0 ? ' active' : ''}">
             <div class="post-date">${fmtDate(post.date)}</div>
             <h2 class="post-title">${post.title?.rendered || ''}</h2>
-            ${buildSlider(imgs)}
-            <div class="post-text">${text}</div>
+            <div class="slide-body">
+              ${buildSlider(imgs)}
+              ${text ? `<div class="post-text">${text}</div>` : ''}
+            </div>
           </div>`;
       }).join('');
 
       navEl.innerHTML = posts.map((_, i) =>
         `<span class="post-dot${i === 0 ? ' on' : ''}" data-i="${i}"></span>`).join('');
 
-      slides = [...stage.querySelectorAll('.slide')];
-      dots   = [...navEl.querySelectorAll('.post-dot')];
+      slides   = [...stage.querySelectorAll('.slide')];
+      navDots  = [...navEl.querySelectorAll('.post-dot')];
 
-      // Klick auf Dots
-      dots.forEach(d => d.addEventListener('click', () => {
+      // Layout für alle Slides berechnen (auch inaktive sind im DOM)
+      slides.forEach(autoFit);
+
+      // Klick auf Navigationspunkte
+      navDots.forEach(d => d.addEventListener('click', () => {
         clearInterval(postTimer);
         showPost(+d.dataset.i);
-        if (slides.length > 1) postTimer = setInterval(() => showPost(currentPost + 1), POST_DURATION);
+        if (slides.length > 1)
+          postTimer = setInterval(() => showPost(current + 1), POST_DURATION);
       }));
 
-      currentPost = 0;
+      current = 0;
       startImgSlider(slides[0], 0);
       startProgress();
 
       if (slides.length > 1) {
-        if (postTimer) clearInterval(postTimer);
-        postTimer = setInterval(() => showPost(currentPost + 1), POST_DURATION);
+        clearInterval(postTimer);
+        postTimer = setInterval(() => showPost(current + 1), POST_DURATION);
       }
 
     } catch (e) {
@@ -350,6 +376,9 @@
 
   load();
   setInterval(load, 5 * 60 * 1000);
+
+  // Layout bei Fenstergrößenänderung neu berechnen
+  window.addEventListener('resize', () => slides.forEach(autoFit));
 </script>
 
 </body>
