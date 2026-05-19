@@ -350,8 +350,7 @@
 
 <script>
   // ── Konfiguration ────────────────────────────────────────────
-  const REFRESH_MS   = 5 * 60 * 1000;   // News alle 5 Minuten laden
-  const PAGE_RELOAD  = 15 * 60 * 1000;  // Ganze Seite alle 15 Min neu laden
+  const REFRESH_MS = 5 * 60 * 1000;  // Vertretungsplan + News alle 5 Minuten
 
   // Lokaler PHP-Proxy – kein Drittanbieter nötig
   const API = 'rss-proxy.php';
@@ -479,8 +478,16 @@
     }, REFRESH_MS);
   }
 
-  // ── Seiten-Reload (damit Vertretungsplan stets aktuell bleibt)
-  setTimeout(() => location.reload(), PAGE_RELOAD);
+  // ── Vertretungsplan-iframe alle 5 Min neu laden ──────────────
+  const SUBST_SRC = document.getElementById('subst-frame').src;
+
+  function reloadSubst() {
+    const frame = document.getElementById('subst-frame');
+    frame.src = '';
+    requestAnimationFrame(() => { frame.src = SUBST_SRC; });
+  }
+
+  setInterval(reloadSubst, REFRESH_MS);
 
   // ── Start ────────────────────────────────────────────────────
   loadNews();
