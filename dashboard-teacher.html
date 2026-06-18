@@ -196,6 +196,32 @@
     reloadFrame('frame-subst');
   }, REFRESH_MS);
 
+  // ── Auto-Scroll Kicktipp ──────────────────────────────────────
+  const SCROLL_SPEED = 40;   // Pixel pro Sekunde
+  const PAUSE_TOP    = 3000; // ms Pause oben bevor scrollen startet
+  const PAUSE_BOTTOM = 3000; // ms Pause unten bevor zurück nach oben
+
+  const panel = document.getElementById('kicktipp-panel');
+  let scrolling = true;
+
+  function autoScroll() {
+    if (!scrolling) return;
+    const atBottom = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 2;
+    if (atBottom) {
+      scrolling = false;
+      setTimeout(() => {
+        panel.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => { scrolling = true; autoScroll(); }, PAUSE_TOP);
+      }, PAUSE_BOTTOM);
+      return;
+    }
+    panel.scrollTop += 1;
+    setTimeout(autoScroll, 1000 / SCROLL_SPEED);
+  }
+
+  // Warten bis Widget geladen ist, dann starten
+  setTimeout(autoScroll, 3000);
+
 </script>
 
 </body>
