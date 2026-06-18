@@ -117,11 +117,13 @@
       padding: 4px;
     }
 
-    /* Kicktipp Widget responsiv skalieren */
-    #kicktipp-panel > iframe,
-    #kicktipp-panel > div {
+    /* Kicktipp Widget: iframe auf volle Panel-Höhe zwingen */
+    #kicktipp-panel iframe {
       width: 100% !important;
-      max-width: 100% !important;
+      height: calc(100vh - 130px) !important;
+      min-height: 500px !important;
+      border: none !important;
+      display: block !important;
     }
   </style>
 </head>
