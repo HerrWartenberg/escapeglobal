@@ -105,6 +105,24 @@
       border: none;
       display: block;
     }
+
+    #kicktipp-panel {
+      flex: 1;
+      background: #fff;
+      border-radius: 12px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-shadow: 0 1px 4px rgba(12,37,148,.08), 0 4px 16px rgba(12,37,148,.06);
+      border: 1px solid var(--border);
+      padding: 4px;
+    }
+
+    /* Kicktipp Widget responsiv skalieren */
+    #kicktipp-panel > iframe,
+    #kicktipp-panel > div {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
   </style>
 </head>
 <body>
@@ -139,8 +157,8 @@
 
   <div class="panel">
     <div class="panel-label">Kicktipp – Tippübersicht</div>
-    <div class="panel-card" style="overflow-y: auto; padding: 8px;">
-      <script src="https://www.kicktipp.de/flora26/javascript"></script>
+    <div id="kicktipp-panel">
+      <script src="https://www.kicktipp.de/flora26/javascript"> </script>
     </div>
   </div>
 
