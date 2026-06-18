@@ -139,11 +139,8 @@
 
   <div class="panel">
     <div class="panel-label">Kicktipp – Tippübersicht</div>
-    <div class="panel-card">
-      <iframe id="frame-kicktipp"
-        src="https://www.kicktipp.de/flora26/tippuebersicht"
-        title="Kicktipp">
-      </iframe>
+    <div class="panel-card" style="overflow-y: auto;">
+      <div id="kicktipp-widget" style="width:100%; min-height:100%;"></div>
     </div>
   </div>
 
@@ -175,12 +172,23 @@
     requestAnimationFrame(() => { f.src = s; });
   }
 
+  // Kicktipp-Widget neu laden: Script-Tag neu einfügen
+  function reloadKicktipp() {
+    const container = document.getElementById('kicktipp-widget');
+    container.innerHTML = '';
+    const s = document.createElement('script');
+    s.src = 'https://www.kicktipp.de/flora26/javascript';
+    container.appendChild(s);
+  }
+
   setInterval(() => {
     reloadFrame('frame-subst');
-    reloadFrame('frame-kicktipp');
+    reloadKicktipp();
   }, REFRESH_MS);
 
 </script>
+
+<script src="https://www.kicktipp.de/flora26/javascript"></script>
 
 </body>
 </html>
