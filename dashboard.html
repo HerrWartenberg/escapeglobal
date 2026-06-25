@@ -105,9 +105,31 @@
       border: none;
       display: block;
     }
+
+    /* ── Vollbild-Button ────────────────────────────────────── */
+    #fs-btn {
+      position: fixed;
+      bottom: 14px;
+      right: 14px;
+      z-index: 999;
+      background: rgba(12,37,148,.7);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: .35;
+      transition: opacity .2s;
+      line-height: 1;
+    }
+    #fs-btn:hover { opacity: 1; }
+    :fullscreen #fs-btn { display: none; }
   </style>
 </head>
 <body>
+
+<button id="fs-btn" title="Vollbild (F)">⛶</button>
 
 <header>
   <div class="header-left">
@@ -179,6 +201,17 @@
     reloadFrame('frame-subst');
     reloadFrame('frame-news');
   }, REFRESH_MS);
+
+  // ── Vollbild ─────────────────────────────────────────────────
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+  document.getElementById('fs-btn').addEventListener('click', toggleFullscreen);
+  document.addEventListener('keydown', e => { if (e.key === 'f' || e.key === 'F') toggleFullscreen(); });
 </script>
 
 </body>
