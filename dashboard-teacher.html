@@ -243,6 +243,9 @@
   // Warten bis Widget geladen ist, dann starten
   setTimeout(autoScroll, 3000);
 
+  // ── Kicktipp: Seite einmal pro Stunde neu laden ───────────────
+  setInterval(() => location.reload(), 60 * 60 * 1000);
+
   // ── Vollbild ─────────────────────────────────────────────────
   function toggleFullscreen() {
     if (!document.fullscreenElement) {
